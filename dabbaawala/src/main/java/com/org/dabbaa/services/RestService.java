@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestService {
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	public String getService(@PathVariable String name){
-		return name +": This is project first restfull webservice";
+		return name +": This is project first restfull webservice.";
 	}
 }

@@ -1,4 +1,4 @@
-package com.org.dabbaa;
+package com.org.dabbaa.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -16,23 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	protected final Log log = LogFactory.getLog(getClass());
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home( HttpServletRequest request, HttpServletRequest requestyyy,Model model, HttpServletResponse responsehhh) {
+	public String home( HttpServletRequest request, Model model, HttpServletResponse response) {
 		logger.info("Welcome home! The client locale is {}.", "");
-		logger.info(request.getParameter("aaa"));
-		logger.info(requestyyy.getParameter("aaa"));
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.ENGLISH);
 		

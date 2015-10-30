@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("com.org.dabbaa.model")
+@ComponentScan("com.org.dabbaa")
 @EnableWebMvc 
 @EnableTransactionManagement
 public class ApplicationContextConfig {

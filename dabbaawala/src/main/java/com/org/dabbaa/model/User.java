@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users", catalog = "test")
+@Table(catalog="dabbaawala" , name = "users")
 public class User {
 
 

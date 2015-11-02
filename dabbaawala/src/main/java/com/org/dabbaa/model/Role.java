@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Role_Master", catalog = "test")
+@Table(catalog="dabbaawala" , name = "Role_Master")
 public class Role extends ConfigMaster{
 
 	public Role() {

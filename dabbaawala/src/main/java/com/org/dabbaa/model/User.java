@@ -1,68 +1,50 @@
 package com.org.dabbaa.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+/**
+ * The persistent class for the users database table.
+ * 
+ */
 @Entity
-@Table(catalog="dabbaawala" , name = "users")
-public class User {
+@Table(name="users")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId", unique = true, nullable = false)
-	private int userId;
-	
 	@Id
-	@Column(name = "username", unique = true, nullable = false, length = 50)
-	private String username;
+	private int user_Id;
 
-	@Column(name = "password", nullable = false, length = 60)
+	private byte enabled;
+
 	private String password;
 
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled;	
+	private String username;
 
-	
-	private String[] roles;
-	
-	@OneToMany(targetEntity = UserRole.class, fetch = FetchType.EAGER, mappedBy = "user", cascade=CascadeType.ALL ,orphanRemoval=true)
-	private Set<UserRole> userRole;
+	//bi-directional many-to-one association to UserRole
+	@ManyToOne
+	@JoinColumn(name="role_id")
+	private UserRole userRole;
 
 	public User() {
 	}
 
-	public User(int id,String username, String password, boolean enabled) {
-		this.userId=id;;
-		this.username = username;
-		this.password = password;
+	public int getUser_Id() {
+		return this.user_Id;
+	}
+
+	public void setUser_Id(int user_Id) {
+		this.user_Id = user_Id;
+	}
+
+	public byte getEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(byte enabled) {
 		this.enabled = enabled;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int id) {
-		this.userId = id;
-	}
-	
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -73,70 +55,20 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isEnabled() {
-		return this.enabled;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Set<UserRole> getUserRole() {
+	public UserRole getUserRole() {
 		return this.userRole;
 	}
 
-	public void setUserRole(Set<UserRole> userRole) {
+	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
-	}
-	
-	public String[] getRoles() {
-		return roles;
-	}
-
-	public void setRoles(String[] roles) {
-		System.out.println("Setting the roles" + roles);
-		this.roles = roles;				
-	}
-
-	
-	public void populateRoles(){
-		
-		System.out.println("Inside populate roles..Length of roles is" + roles.length);
-		
-		if(null != roles && roles.length>0){
-			HashSet<UserRole> userRoleTemp = new HashSet<UserRole>(roles.length);
-						
-			for (String role: roles){
-				System.out.println("roleName "+role);
-				userRoleTemp.add(new UserRole(this,role));
-			}
-			
-			setUserRole(userRoleTemp);
-		}	
-	}
-	
-	public void populateTestRoles(){
-		
-		System.out.println("Inside test populate roles..Length of roles is" + roles.length);
-		
-		if(null != roles && roles.length>0){
-			HashSet<UserRole> userRoleTemp = new HashSet<UserRole>(roles.length);			
-				
-				UserRole ur = new UserRole(this,"abcd");
-				ur.setUserRoleId(1);
-				
-				userRoleTemp.add(ur);
-			
-			
-			setUserRole(userRoleTemp);
-		}	
-	}
-	
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username
-				+ ", password=" + password + ", enabled=" + enabled
-				+ ", userRole=" + userRole + "]";
 	}
 
 }

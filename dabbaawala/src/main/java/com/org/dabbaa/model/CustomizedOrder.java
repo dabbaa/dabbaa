@@ -10,24 +10,23 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="customized_order")
+@Table(name="customized_order")
 @NamedQuery(name="CustomizedOrder.findAll", query="SELECT c FROM CustomizedOrder c")
 public class CustomizedOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="CUSTOMIZED_ORDER_ID", unique=true, nullable=false)
+	@Column(name="CUSTOMIZED_ORDER_ID")
 	private int customizedOrderId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(name="UPDATED_BY", length=45)
+	@Column(name="UPDATED_BY")
 	private String updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -36,23 +35,23 @@ public class CustomizedOrder implements Serializable {
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="CUSTOMER_ID", nullable=false)
+	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
-
-	//bi-directional many-to-one association to Vendor
-	@ManyToOne
-	@JoinColumn(name="VENDOR_ID", nullable=false)
-	private Vendor vendor;
-
-	//bi-directional many-to-one association to Address
-	@ManyToOne
-	@JoinColumn(name="ADDRESS_ID", nullable=false)
-	private Address address;
 
 	//bi-directional many-to-one association to TiffinType
 	@ManyToOne
-	@JoinColumn(name="TIFFIN_TYPE_ID", nullable=false)
+	@JoinColumn(name="TIFFIN_TYPE_ID")
 	private TiffinType tiffinType;
+
+	//bi-directional many-to-one association to Address
+	@ManyToOne
+	@JoinColumn(name="ADDRESS_ID")
+	private Address address;
+
+	//bi-directional many-to-one association to Vendor
+	@ManyToOne
+	@JoinColumn(name="VENDOR_ID")
+	private Vendor vendor;
 
 	public CustomizedOrder() {
 	}
@@ -105,12 +104,12 @@ public class CustomizedOrder implements Serializable {
 		this.customer = customer;
 	}
 
-	public Vendor getVendor() {
-		return this.vendor;
+	public TiffinType getTiffinType() {
+		return this.tiffinType;
 	}
 
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
+	public void setTiffinType(TiffinType tiffinType) {
+		this.tiffinType = tiffinType;
 	}
 
 	public Address getAddress() {
@@ -121,12 +120,12 @@ public class CustomizedOrder implements Serializable {
 		this.address = address;
 	}
 
-	public TiffinType getTiffinType() {
-		return this.tiffinType;
+	public Vendor getVendor() {
+		return this.vendor;
 	}
 
-	public void setTiffinType(TiffinType tiffinType) {
-		this.tiffinType = tiffinType;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 }

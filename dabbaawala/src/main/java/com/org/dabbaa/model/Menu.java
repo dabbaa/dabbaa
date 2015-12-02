@@ -10,38 +10,36 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="menu")
 @NamedQuery(name="Menu.findAll", query="SELECT m FROM Menu m")
 public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="MENU_ID", unique=true, nullable=false)
+	@Column(name="MENU_ID")
 	private int menuId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false, length=500)
+	@Lob
 	private String description;
 
 	@Column(name="IS_ACTIVE")
 	private byte isActive;
 
-	//bi-directional many-to-one association to Vendor
-	@ManyToOne
-	@JoinColumn(name="VENDOR_ID", nullable=false)
-	private Vendor vendor;
-
 	//bi-directional many-to-one association to TiffinType
 	@ManyToOne
-	@JoinColumn(name="TIFFIN_TYPE_ID", nullable=false)
+	@JoinColumn(name="TIFFIN_TYPE_ID")
 	private TiffinType tiffinType;
+
+	//bi-directional many-to-one association to Vendor
+	@ManyToOne
+	@JoinColumn(name="VENDOR_ID")
+	private Vendor vendor;
 
 	public Menu() {
 	}
@@ -86,20 +84,20 @@ public class Menu implements Serializable {
 		this.isActive = isActive;
 	}
 
-	public Vendor getVendor() {
-		return this.vendor;
-	}
-
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
-	}
-
 	public TiffinType getTiffinType() {
 		return this.tiffinType;
 	}
 
 	public void setTiffinType(TiffinType tiffinType) {
 		this.tiffinType = tiffinType;
+	}
+
+	public Vendor getVendor() {
+		return this.vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 }

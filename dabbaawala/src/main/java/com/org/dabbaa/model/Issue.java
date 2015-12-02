@@ -10,17 +10,15 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="issue")
 @NamedQuery(name="Issue.findAll", query="SELECT i FROM Issue i")
 public class Issue implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ISSUE_ID", unique=true, nullable=false)
+	@Column(name="ISSUE_ID")
 	private int issueId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -30,25 +28,25 @@ public class Issue implements Serializable {
 	@Column(name="IS_SOLVED")
 	private byte isSolved;
 
-	@Column(nullable=false, length=500)
+	@Lob
 	private String issue;
 
-	@Column(name="UPDATED_BY", length=45)
+	@Column(name="UPDATED_BY")
 	private String updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="UPDATED_ON")
 	private Date updatedOn;
 
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CUSTOMER_ID", nullable=false)
-	private Customer customer;
-
 	//bi-directional many-to-one association to Vendor
 	@ManyToOne
 	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne
+	@JoinColumn(name="CUSTOMER_ID")
+	private Customer customer;
 
 	public Issue() {
 	}
@@ -109,20 +107,20 @@ public class Issue implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public Vendor getVendor() {
 		return this.vendor;
 	}
 
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
+	}
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

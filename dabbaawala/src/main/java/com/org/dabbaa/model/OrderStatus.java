@@ -9,17 +9,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="order_status")
+@Table(name="order_status")
 @NamedQuery(name="OrderStatus.findAll", query="SELECT o FROM OrderStatus o")
 public class OrderStatus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ORDER_STATUS_ID", unique=true, nullable=false)
+	@Column(name="ORDER_STATUS_ID")
 	private int orderStatusId;
 
-	@Column(nullable=false, length=45)
 	private String description;
 
 	public OrderStatus() {

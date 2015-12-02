@@ -2,7 +2,7 @@ package com.org.dabbaa.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -10,34 +10,32 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="tiffin_type")
+@Table(name="tiffin_type")
 @NamedQuery(name="TiffinType.findAll", query="SELECT t FROM TiffinType t")
 public class TiffinType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="TIFFIN_TYPE_ID", unique=true, nullable=false)
+	@Column(name="TIFFIN_TYPE_ID")
 	private int tiffinTypeId;
 
-	@Column(nullable=false, length=45)
 	private String description;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="tiffinType", fetch=FetchType.EAGER)
-	private List<CustomizedOrder> customizedOrders;
+	@OneToMany(mappedBy="tiffinType")
+	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="tiffinType", fetch=FetchType.EAGER)
-	private List<DailyOrder> dailyOrders;
+	@OneToMany(mappedBy="tiffinType")
+	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Menu
-	@OneToMany(mappedBy="tiffinType", fetch=FetchType.EAGER)
-	private List<Menu> menus;
+	@OneToMany(mappedBy="tiffinType")
+	private Set<Menu> menus;
 
 	//bi-directional many-to-one association to Rate
-	@OneToMany(mappedBy="tiffinType", fetch=FetchType.EAGER)
-	private List<Rate> rates;
+	@OneToMany(mappedBy="tiffinType")
+	private Set<Rate> rates;
 
 	public TiffinType() {
 	}
@@ -58,11 +56,11 @@ public class TiffinType implements Serializable {
 		this.description = description;
 	}
 
-	public List<CustomizedOrder> getCustomizedOrders() {
+	public Set<CustomizedOrder> getCustomizedOrders() {
 		return this.customizedOrders;
 	}
 
-	public void setCustomizedOrders(List<CustomizedOrder> customizedOrders) {
+	public void setCustomizedOrders(Set<CustomizedOrder> customizedOrders) {
 		this.customizedOrders = customizedOrders;
 	}
 
@@ -80,11 +78,11 @@ public class TiffinType implements Serializable {
 		return customizedOrder;
 	}
 
-	public List<DailyOrder> getDailyOrders() {
+	public Set<DailyOrder> getDailyOrders() {
 		return this.dailyOrders;
 	}
 
-	public void setDailyOrders(List<DailyOrder> dailyOrders) {
+	public void setDailyOrders(Set<DailyOrder> dailyOrders) {
 		this.dailyOrders = dailyOrders;
 	}
 
@@ -102,11 +100,11 @@ public class TiffinType implements Serializable {
 		return dailyOrder;
 	}
 
-	public List<Menu> getMenus() {
+	public Set<Menu> getMenus() {
 		return this.menus;
 	}
 
-	public void setMenus(List<Menu> menus) {
+	public void setMenus(Set<Menu> menus) {
 		this.menus = menus;
 	}
 
@@ -124,11 +122,11 @@ public class TiffinType implements Serializable {
 		return menus;
 	}
 
-	public List<Rate> getRates() {
+	public Set<Rate> getRates() {
 		return this.rates;
 	}
 
-	public void setRates(List<Rate> rates) {
+	public void setRates(Set<Rate> rates) {
 		this.rates = rates;
 	}
 

@@ -3,7 +3,7 @@ package com.org.dabbaa.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -11,39 +11,35 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="vendor")
 @NamedQuery(name="Vendor.findAll", query="SELECT v FROM Vendor v")
 public class Vendor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="VENDOR_ID", unique=true, nullable=false)
+	@Column(name="VENDOR_ID")
 	private int vendorId;
 
-	@Column(nullable=false, length=45)
 	private String address;
 
-	@Column(name="CONTACT_NO", nullable=false, length=12)
+	@Column(name="CONTACT_NO")
 	private String contactNo;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(name="EMAIL_ID", length=45)
+	@Column(name="EMAIL_ID")
 	private String emailId;
 
 	@Column(name="IS_ACTIVE")
 	private byte isActive;
 
-	@Column(nullable=false, length=45)
 	private String name;
 
-	@Column(name="UPDATED_BY", length=45)
+	@Column(name="UPDATED_BY")
 	private String updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -51,41 +47,41 @@ public class Vendor implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<CustomizedOrder> customizedOrders;
+	@OneToMany(mappedBy="vendor")
+	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<DailyOrder> dailyOrders;
+	@OneToMany(mappedBy="vendor")
+	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<Feedback> feedbacks;
+	@OneToMany(mappedBy="vendor")
+	private Set<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Issue
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<Issue> issues;
+	@OneToMany(mappedBy="vendor")
+	private Set<Issue> issues;
 
 	//bi-directional many-to-one association to Menu
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<Menu> menus;
+	@OneToMany(mappedBy="vendor")
+	private Set<Menu> menus;
 
 	//bi-directional many-to-one association to Rate
-	@OneToMany(mappedBy="vendor", fetch=FetchType.EAGER)
-	private List<Rate> rates;
+	@OneToMany(mappedBy="vendor")
+	private Set<Rate> rates;
 
 	//bi-directional many-to-many association to Location
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(
 		name="vendor_location"
 		, joinColumns={
-			@JoinColumn(name="VENDOR_ID", nullable=false)
+			@JoinColumn(name="VENDOR_ID")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="LOCATION_ID", nullable=false)
+			@JoinColumn(name="LOCATION_ID")
 			}
 		)
-	private List<Location> locations;
+	private Set<Location> locations;
 
 	public Vendor() {
 	}
@@ -170,11 +166,11 @@ public class Vendor implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	public List<CustomizedOrder> getCustomizedOrders() {
+	public Set<CustomizedOrder> getCustomizedOrders() {
 		return this.customizedOrders;
 	}
 
-	public void setCustomizedOrders(List<CustomizedOrder> customizedOrders) {
+	public void setCustomizedOrders(Set<CustomizedOrder> customizedOrders) {
 		this.customizedOrders = customizedOrders;
 	}
 
@@ -192,11 +188,11 @@ public class Vendor implements Serializable {
 		return customizedOrder;
 	}
 
-	public List<DailyOrder> getDailyOrders() {
+	public Set<DailyOrder> getDailyOrders() {
 		return this.dailyOrders;
 	}
 
-	public void setDailyOrders(List<DailyOrder> dailyOrders) {
+	public void setDailyOrders(Set<DailyOrder> dailyOrders) {
 		this.dailyOrders = dailyOrders;
 	}
 
@@ -214,11 +210,11 @@ public class Vendor implements Serializable {
 		return dailyOrder;
 	}
 
-	public List<Feedback> getFeedbacks() {
+	public Set<Feedback> getFeedbacks() {
 		return this.feedbacks;
 	}
 
-	public void setFeedbacks(List<Feedback> feedbacks) {
+	public void setFeedbacks(Set<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
 
@@ -236,11 +232,11 @@ public class Vendor implements Serializable {
 		return feedback;
 	}
 
-	public List<Issue> getIssues() {
+	public Set<Issue> getIssues() {
 		return this.issues;
 	}
 
-	public void setIssues(List<Issue> issues) {
+	public void setIssues(Set<Issue> issues) {
 		this.issues = issues;
 	}
 
@@ -258,11 +254,11 @@ public class Vendor implements Serializable {
 		return issue;
 	}
 
-	public List<Menu> getMenus() {
+	public Set<Menu> getMenus() {
 		return this.menus;
 	}
 
-	public void setMenus(List<Menu> menus) {
+	public void setMenus(Set<Menu> menus) {
 		this.menus = menus;
 	}
 
@@ -280,11 +276,11 @@ public class Vendor implements Serializable {
 		return menus;
 	}
 
-	public List<Rate> getRates() {
+	public Set<Rate> getRates() {
 		return this.rates;
 	}
 
-	public void setRates(List<Rate> rates) {
+	public void setRates(Set<Rate> rates) {
 		this.rates = rates;
 	}
 
@@ -302,11 +298,11 @@ public class Vendor implements Serializable {
 		return rate;
 	}
 
-	public List<Location> getLocations() {
+	public Set<Location> getLocations() {
 		return this.locations;
 	}
 
-	public void setLocations(List<Location> locations) {
+	public void setLocations(Set<Location> locations) {
 		this.locations = locations;
 	}
 

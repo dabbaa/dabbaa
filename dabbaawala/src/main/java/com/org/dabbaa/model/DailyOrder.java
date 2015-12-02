@@ -10,73 +10,71 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="daily_order")
+@Table(name="daily_order")
 @NamedQuery(name="DailyOrder.findAll", query="SELECT d FROM DailyOrder d")
 public class DailyOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="DAILY_ORDER_ID", unique=true, nullable=false)
-	private Integer dailyOrderId;
+	@Column(name="DAILY_ORDER_ID")
+	private int dailyOrderId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false)
 	private double rate;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="TIFFIN_DATE", nullable=false)
+	@Column(name="TIFFIN_DATE")
 	private Date tiffinDate;
 
-	@Column(name="UPDATED_BY", length=45)
+	@Column(name="UPDATED_BY")
 	private String updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="UPDATED_ON")
 	private Date updatedOn;
 
-	@Column(name="VENDOR_RATE", nullable=false)
+	@Column(name="VENDOR_RATE")
 	private double vendorRate;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CUSTOMER_ID", nullable=false)
-	private Customer customer;
 
 	//bi-directional many-to-one association to Vendor
 	@ManyToOne
-	@JoinColumn(name="VENDOR_ID", nullable=false)
+	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="ADDRESS_ID", nullable=false)
+	@JoinColumn(name="ADDRESS_ID")
 	private Address address;
-
-	//bi-directional many-to-one association to TiffinType
-	@ManyToOne
-	@JoinColumn(name="TIFFIN_TYPE_ID", nullable=false)
-	private TiffinType tiffinType;
 
 	//bi-directional many-to-one association to Scheme
 	@ManyToOne
 	@JoinColumn(name="SCHEME_ID")
 	private Scheme scheme;
 
+	//bi-directional many-to-one association to TiffinType
+	@ManyToOne
+	@JoinColumn(name="TIFFIN_TYPE_ID")
+	private TiffinType tiffinType;
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne
+	@JoinColumn(name="CUSTOMER_ID")
+	private Customer customer;
+
 	public DailyOrder() {
 	}
 
-	public Integer getDailyOrderId() {
+	public int getDailyOrderId() {
 		return this.dailyOrderId;
 	}
 
-	public void setDailyOrderId(Integer dailyOrderId) {
+	public void setDailyOrderId(int dailyOrderId) {
 		this.dailyOrderId = dailyOrderId;
 	}
 
@@ -136,14 +134,6 @@ public class DailyOrder implements Serializable {
 		this.vendorRate = vendorRate;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public Vendor getVendor() {
 		return this.vendor;
 	}
@@ -160,6 +150,14 @@ public class DailyOrder implements Serializable {
 		this.address = address;
 	}
 
+	public Scheme getScheme() {
+		return this.scheme;
+	}
+
+	public void setScheme(Scheme scheme) {
+		this.scheme = scheme;
+	}
+
 	public TiffinType getTiffinType() {
 		return this.tiffinType;
 	}
@@ -168,12 +166,12 @@ public class DailyOrder implements Serializable {
 		this.tiffinType = tiffinType;
 	}
 
-	public Scheme getScheme() {
-		return this.scheme;
+	public Customer getCustomer() {
+		return this.customer;
 	}
 
-	public void setScheme(Scheme scheme) {
-		this.scheme = scheme;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

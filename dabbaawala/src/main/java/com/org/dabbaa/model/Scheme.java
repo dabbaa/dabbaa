@@ -3,7 +3,7 @@ package com.org.dabbaa.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -11,24 +11,21 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="scheme")
 @NamedQuery(name="Scheme.findAll", query="SELECT s FROM Scheme s")
 public class Scheme implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="SCHEME_ID", unique=true, nullable=false)
+	@Column(name="SCHEME_ID")
 	private int schemeId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false, length=45)
 	private String description;
 
 	private double discount;
@@ -40,8 +37,8 @@ public class Scheme implements Serializable {
 	private byte isActive;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="scheme", fetch=FetchType.EAGER)
-	private List<DailyOrder> dailyOrders;
+	@OneToMany(mappedBy="scheme")
+	private Set<DailyOrder> dailyOrders;
 
 	public Scheme() {
 	}
@@ -102,11 +99,11 @@ public class Scheme implements Serializable {
 		this.isActive = isActive;
 	}
 
-	public List<DailyOrder> getDailyOrders() {
+	public Set<DailyOrder> getDailyOrders() {
 		return this.dailyOrders;
 	}
 
-	public void setDailyOrders(List<DailyOrder> dailyOrders) {
+	public void setDailyOrders(Set<DailyOrder> dailyOrders) {
 		this.dailyOrders = dailyOrders;
 	}
 

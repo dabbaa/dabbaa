@@ -3,7 +3,7 @@ package com.org.dabbaa.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -11,34 +11,31 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="location")
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="LOCATION_ID", unique=true, nullable=false)
+	@Column(name="LOCATION_ID")
 	private int locationId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false, length=45)
 	private String description;
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="ADDRESS_ID", nullable=false)
+	@JoinColumn(name="ADDRESS_ID")
 	private Address address;
 
 	//bi-directional many-to-many association to Vendor
-	@ManyToMany(mappedBy="locations", fetch=FetchType.EAGER)
-	private List<Vendor> vendors;
+	@ManyToMany(mappedBy="locations")
+	private Set<Vendor> vendors;
 
 	public Location() {
 	}
@@ -83,11 +80,11 @@ public class Location implements Serializable {
 		this.address = address;
 	}
 
-	public List<Vendor> getVendors() {
+	public Set<Vendor> getVendors() {
 		return this.vendors;
 	}
 
-	public void setVendors(List<Vendor> vendors) {
+	public void setVendors(Set<Vendor> vendors) {
 		this.vendors = vendors;
 	}
 

@@ -1,19 +1,8 @@
 package com.org.dabbaa.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
@@ -21,43 +10,39 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="rate")
 @NamedQuery(name="Rate.findAll", query="SELECT r FROM Rate r")
 public class Rate implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="RATE_ID", unique=true, nullable=false)
+	@Column(name="RATE_ID")
 	private int rateId;
 
-	@Column(name="CREATED_BY", nullable=false, length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATED_ON", nullable=false)
+	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false, length=45)
 	private String description;
 
 	@Column(name="IS_ACTIVE")
 	private byte isActive;
 
-	@Column(nullable=false)
 	private double rate;
 
-	@Column(name="VENDOR_RATE", nullable=false)
+	@Column(name="VENDOR_RATE")
 	private double vendorRate;
 
 	//bi-directional many-to-one association to TiffinType
 	@ManyToOne
-	@JoinColumn(name="TIFFIN_TYPE_ID", nullable=false)
+	@JoinColumn(name="TIFFIN_TYPE_ID")
 	private TiffinType tiffinType;
 
 	//bi-directional many-to-one association to Vendor
 	@ManyToOne
-	@JoinColumn(name="VENDOR_ID", nullable=false)
+	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
 
 	public Rate() {

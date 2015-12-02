@@ -10,35 +10,32 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="feedback")
 @NamedQuery(name="Feedback.findAll", query="SELECT f FROM Feedback f")
 public class Feedback implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="FEEDBACK_ID", unique=true, nullable=false)
+	@Column(name="FEEDBACK_ID")
 	private int feedbackId;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CREATED_ON")
 	private Date createdOn;
 
-	@Column(nullable=false, length=200)
 	private String description;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CUSTOMER_ID", nullable=false)
-	private Customer customer;
 
 	//bi-directional many-to-one association to Vendor
 	@ManyToOne
 	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne
+	@JoinColumn(name="CUSTOMER_ID")
+	private Customer customer;
 
 	public Feedback() {
 	}
@@ -75,20 +72,20 @@ public class Feedback implements Serializable {
 		this.description = description;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public Vendor getVendor() {
 		return this.vendor;
 	}
 
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
+	}
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

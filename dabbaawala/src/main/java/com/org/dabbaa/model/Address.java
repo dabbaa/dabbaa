@@ -3,7 +3,7 @@ package com.org.dabbaa.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -11,23 +11,19 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(catalog="dabbaawala" , name="address")
 @NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ADDRESS_ID", unique=true, nullable=false)
+	@Column(name="ADDRESS_ID")
 	private int addressId;
 
-	@Column(nullable=false, length=200)
 	private String address;
 
-	@Column(length=45)
 	private String city;
 
-	@Column(name="CREATED_BY", length=45)
+	@Column(name="CREATED_BY")
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -36,10 +32,9 @@ public class Address implements Serializable {
 
 	private int pincode;
 
-	@Column(length=45)
 	private String state;
 
-	@Column(name="UPDATED_BY", length=45)
+	@Column(name="UPDATED_BY")
 	private String updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,20 +42,20 @@ public class Address implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-many association to Customer
-	@ManyToMany(mappedBy="addresses", fetch=FetchType.EAGER)
-	private List<Customer> customers;
+	@ManyToMany(mappedBy="addresses")
+	private Set<Customer> customers;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
-	private List<CustomizedOrder> customizedOrders;
+	@OneToMany(mappedBy="address")
+	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
-	private List<DailyOrder> dailyOrders;
+	@OneToMany(mappedBy="address")
+	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Location
-	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
-	private List<Location> locations;
+	@OneToMany(mappedBy="address")
+	private Set<Location> locations;
 
 	public Address() {
 	}
@@ -137,19 +132,19 @@ public class Address implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	public List<Customer> getCustomers() {
+	public Set<Customer> getCustomers() {
 		return this.customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
+	public void setCustomers(Set<Customer> customers) {
 		this.customers = customers;
 	}
 
-	public List<CustomizedOrder> getCustomizedOrders() {
+	public Set<CustomizedOrder> getCustomizedOrders() {
 		return this.customizedOrders;
 	}
 
-	public void setCustomizedOrders(List<CustomizedOrder> customizedOrders) {
+	public void setCustomizedOrders(Set<CustomizedOrder> customizedOrders) {
 		this.customizedOrders = customizedOrders;
 	}
 
@@ -167,11 +162,11 @@ public class Address implements Serializable {
 		return customizedOrder;
 	}
 
-	public List<DailyOrder> getDailyOrders() {
+	public Set<DailyOrder> getDailyOrders() {
 		return this.dailyOrders;
 	}
 
-	public void setDailyOrders(List<DailyOrder> dailyOrders) {
+	public void setDailyOrders(Set<DailyOrder> dailyOrders) {
 		this.dailyOrders = dailyOrders;
 	}
 
@@ -189,11 +184,11 @@ public class Address implements Serializable {
 		return dailyOrder;
 	}
 
-	public List<Location> getLocations() {
+	public Set<Location> getLocations() {
 		return this.locations;
 	}
 
-	public void setLocations(List<Location> locations) {
+	public void setLocations(Set<Location> locations) {
 		this.locations = locations;
 	}
 

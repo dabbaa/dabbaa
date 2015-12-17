@@ -9,21 +9,16 @@
 
 <h:head>
 </h:head>
-<f:view>
 <h:body>
-<ui:include src="/WEB-INF/template/menuBar.xhtml" />
-<h:form>
+<ui:composition>
 	<h:panelGroup>
-		
-		<p:panel header="Customer List" toggleable="true" toggleOrientation="horizontal">
-			<p:dataTable value="#{customer.customerList}" var="var" stickyHeader="true">
-				<p:column headerText="Name">
-					<h:outputText value="#{var.firstName}" />
-				</p:column>
-			</p:dataTable>
-		</p:panel>
+		<p:menubar style="margin-top:20px">
+		    <p:submenu label="Customer" icon="ui-icon-document">
+	            <p:menuitem value="List" url="/jsf/customer/customerList.xhtml" />
+                <p:menuitem value="Add/Edit" url="/jsf/customer/customer.xhtml" />
+	        </p:submenu>
+		</p:menubar>
 	</h:panelGroup>
-</h:form>
+</ui:composition>
 </h:body>
-</f:view>
 </html>

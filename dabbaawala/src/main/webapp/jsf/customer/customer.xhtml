@@ -11,16 +11,12 @@
 </h:head>
 <f:view>
 <h:body>
-<ui:include src="/WEB-INF/template/menuBar.xhtml" />
+ <ui:include src="/WEB-INF/template/menuBar.xhtml" />
 <h:form>
 	<h:panelGroup>
 		
-		<p:panel header="Customer List" toggleable="true" toggleOrientation="horizontal">
-			<p:dataTable value="#{customer.customerList}" var="var" stickyHeader="true">
-				<p:column headerText="Name">
-					<h:outputText value="#{var.firstName}" />
-				</p:column>
-			</p:dataTable>
+		<p:panel header="Add/Edit" toggleable="true" toggleOrientation="horizontal">
+			
 		</p:panel>
 	</h:panelGroup>
 </h:form>

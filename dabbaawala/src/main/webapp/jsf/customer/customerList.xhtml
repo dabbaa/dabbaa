@@ -16,7 +16,7 @@
 	<h:panelGroup>
 		
 		<p:panel header="Customer List" toggleable="true" toggleOrientation="horizontal">
-			<p:dataTable value="#{customer.customerList}" var="var" stickyHeader="true">
+			<p:dataTable value="#{customerhandler.customerList}" var="var" stickyHeader="true">
 				<p:column headerText="Name">
 					<h:outputText value="#{var.firstName}" />
 				</p:column>

@@ -1,9 +1,23 @@
 package com.org.dabbaa.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -17,6 +31,7 @@ public class Customer implements Serializable {
 
 	@Id
 	@Column(name="CUSTOMER_ID")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int customerId;
 
 	@Column(name="`COMMENT`")
@@ -62,7 +77,7 @@ public class Customer implements Serializable {
 			@JoinColumn(name="ADDRESS_ID")
 			}
 		)
-	private Set<Address> addresses;
+	private Set<Address> addresses=new HashSet<Address>(0);
 
 	//bi-directional many-to-one association to CustomizedOrder
 	@OneToMany(mappedBy="customer",fetch=FetchType.LAZY)

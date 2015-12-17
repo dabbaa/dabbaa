@@ -23,4 +23,13 @@ public class CustomerDao {
 		return list;
 	}
 
+
+
+	public void saveNewCustomer(Customer customer) {
+		Session session= sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(customer);
+		session.flush();
+	}
+
 }

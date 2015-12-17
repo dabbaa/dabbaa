@@ -3,18 +3,22 @@ package com.org.dabbaa.jsf.controller.customer;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.org.dabbaa.dao.CustomerDao;
 import com.org.dabbaa.model.Customer;
 
-@ManagedBean(name="customer")
+@Qualifier("customer")
+@Component
+@Scope("request")
 public class CustomerBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
+	@Autowired
     private CustomerDao dao;
 	
 	private List<Customer> customerList;

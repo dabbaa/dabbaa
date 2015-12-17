@@ -42,19 +42,19 @@ public class Address implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-many association to Customer
-	@ManyToMany(mappedBy="addresses")
+	@ManyToMany(mappedBy="addresses",fetch=FetchType.LAZY)
 	private Set<Customer> customers;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="address")
+	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
 	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="address")
+	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
 	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Location
-	@OneToMany(mappedBy="address")
+	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
 	private Set<Location> locations;
 
 	public Address() {

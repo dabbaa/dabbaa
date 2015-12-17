@@ -52,7 +52,7 @@ public class Customer implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-many association to Address
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 		name="customer_address"
 		, joinColumns={
@@ -65,19 +65,19 @@ public class Customer implements Serializable {
 	private Set<Address> addresses;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer",fetch=FetchType.LAZY)
 	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer",fetch=FetchType.LAZY)
 	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer",fetch=FetchType.LAZY)
 	private Set<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Issue
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer",fetch=FetchType.LAZY)
 	private Set<Issue> issues;
 
 	public Customer() {

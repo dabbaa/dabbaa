@@ -29,6 +29,13 @@ public class RestService {
 	@RequestMapping(value = "/ttype", method = RequestMethod.GET )
 	@ResponseBody
 	public List<TiffinType> getTiffinTypes(){
-		return dao.getTiffinTypes();
+		List<TiffinType> list=dao.getTiffinTypes();
+		/*for(TiffinType bo:list){
+			bo.setRates(null);
+			bo.setMenus(null);
+			bo.setDailyOrders(null);
+			bo.setCustomizedOrders(null);
+		}*/
+		return list;
 	}
 }

@@ -22,19 +22,19 @@ public class TiffinType implements Serializable {
 	private String description;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="tiffinType")
+	@OneToMany(mappedBy="tiffinType",fetch=FetchType.LAZY)
 	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="tiffinType")
+	@OneToMany(mappedBy="tiffinType",fetch=FetchType.LAZY)
 	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Menu
-	@OneToMany(mappedBy="tiffinType")
+	@OneToMany(mappedBy="tiffinType",fetch=FetchType.LAZY)
 	private Set<Menu> menus;
 
 	//bi-directional many-to-one association to Rate
-	@OneToMany(mappedBy="tiffinType")
+	@OneToMany(mappedBy="tiffinType",fetch=FetchType.LAZY)
 	private Set<Rate> rates;
 
 	public TiffinType() {

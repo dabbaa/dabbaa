@@ -37,7 +37,7 @@ public class Scheme implements Serializable {
 	private byte isActive;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="scheme")
+	@OneToMany(mappedBy="scheme",fetch=FetchType.LAZY)
 	private Set<DailyOrder> dailyOrders;
 
 	public Scheme() {

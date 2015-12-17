@@ -2,7 +2,7 @@ package com.org.dabbaa.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,12 @@ public class UtilDao {
 	
 	public List<TiffinType> getTiffinTypes(){
 		Session session= sessionFactory.openSession();
-		List<TiffinType> list=session.createCriteria(TiffinType.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		List<TiffinType> list=session.createCriteria(TiffinType.class).list();
+			for(TiffinType bo:list)
+			Hibernate.initialize(bo);
+			
+			session.flush();
+			session.close();
 		return list;
 	}
 

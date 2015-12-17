@@ -47,31 +47,31 @@ public class Vendor implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-one association to CustomizedOrder
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<CustomizedOrder> customizedOrders;
 
 	//bi-directional many-to-one association to DailyOrder
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<DailyOrder> dailyOrders;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Issue
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<Issue> issues;
 
 	//bi-directional many-to-one association to Menu
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<Menu> menus;
 
 	//bi-directional many-to-one association to Rate
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.LAZY)
 	private Set<Rate> rates;
 
 	//bi-directional many-to-many association to Location
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 		name="vendor_location"
 		, joinColumns={

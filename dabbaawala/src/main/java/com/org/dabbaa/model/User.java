@@ -24,7 +24,7 @@ public class User implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to UserRole
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="role_id")
 	private UserRole userRole;
 

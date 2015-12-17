@@ -43,27 +43,27 @@ public class DailyOrder implements Serializable {
 	private double vendorRate;
 
 	//bi-directional many-to-one association to Vendor
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ADDRESS_ID")
 	private Address address;
 
 	//bi-directional many-to-one association to Scheme
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SCHEME_ID")
 	private Scheme scheme;
 
 	//bi-directional many-to-one association to TiffinType
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TIFFIN_TYPE_ID")
 	private TiffinType tiffinType;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
 

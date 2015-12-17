@@ -39,12 +39,12 @@ public class Issue implements Serializable {
 	private Date updatedOn;
 
 	//bi-directional many-to-one association to Vendor
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
 

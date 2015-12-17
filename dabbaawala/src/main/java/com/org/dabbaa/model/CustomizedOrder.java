@@ -2,6 +2,9 @@ package com.org.dabbaa.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.context.annotation.Lazy;
+
 import java.util.Date;
 
 
@@ -10,7 +13,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="customized_order")
+@Table(name="customized_order" )
 @NamedQuery(name="CustomizedOrder.findAll", query="SELECT c FROM CustomizedOrder c")
 public class CustomizedOrder implements Serializable {
 	private static final long serialVersionUID = 1L;

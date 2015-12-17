@@ -36,12 +36,12 @@ public class Rate implements Serializable {
 	private double vendorRate;
 
 	//bi-directional many-to-one association to TiffinType
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TIFFIN_TYPE_ID")
 	private TiffinType tiffinType;
 
 	//bi-directional many-to-one association to Vendor
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="VENDOR_ID")
 	private Vendor vendor;
 

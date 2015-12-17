@@ -29,12 +29,12 @@ public class Location implements Serializable {
 	private String description;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ADDRESS_ID")
 	private Address address;
 
 	//bi-directional many-to-many association to Vendor
-	@ManyToMany(mappedBy="locations")
+	@ManyToMany(mappedBy="locations",fetch=FetchType.LAZY)
 	private Set<Vendor> vendors;
 
 	public Location() {

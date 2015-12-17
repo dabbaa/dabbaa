@@ -22,7 +22,7 @@ public class UserRole implements Serializable {
 	private String role;
 
 	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="userRole")
+	@OneToMany(mappedBy="userRole",fetch=FetchType.LAZY)
 	private Set<User> users;
 
 	public UserRole() {
